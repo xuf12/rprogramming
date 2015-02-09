@@ -41,8 +41,8 @@ days2 <- days2[,c(-1,-2)] # remove the original Date and Time variables
 # table(plot2days2$Day) #this shows the empty levels are still there
 # plot2days2 <- droplevels(plot2days2) # drop the empty levels
 
-plot2 <- plot(data = days2, Global_active_power ~ as.POSIXct(Date_Time), xlab = "", ylab = "Global Active Power (kilowatts)", pch = "l", lwd = 0.1)
+plot3 <- plot(data = days2, Sub_metering_1 ~ as.POSIXct(Date_Time), xlab = "", ylab = "Energy sub metering", pch = "l", lwd = 0.1)
 
-dev.copy(png, file = "plot2.png")
+dev.copy(png, file = "plot3.png")
 dev.off()
 
