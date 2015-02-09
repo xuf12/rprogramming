@@ -42,12 +42,28 @@ days2 <- days2[,c(-1,-2)] # remove the original Date and Time variables
 # plot2days2 <- droplevels(plot2days2) # drop the empty levels
 par(mfrow = c(2,2))
 with(days2, {
-  plot(Global_active_power ~ as.POSIXct(Date_Time), xlab = "", ylab = "Global Active Power (kilowatts)", pch = "l")
-  plot(Voltage ~ as.POSIXct(Date_Time), xlab = "datetime", ylab = "Voltage", pch = "l")
-  plot(Sub_metering_1 ~ as.POSIXct(Date_Time), xlab = "", ylab = "Energy sub metering", pch = "l")
-  plot(Global_reactive_power ~ as.POSIXct(Date_Time), xlab = "datetime", ylab = "Global_reactive_power", pch = "l")
+  #plot upper left
+  plot(as.POSIXct(Date_Time), Global_active_power, type="n", xlab = "", ylab = "Global Active Power (kilowatts)")
+  lines(as.POSIXct(Date_Time),Global_active_power)
+  #plot upper right
+  plot(Voltage ~ as.POSIXct(Date_Time), type="n", xlab = "datetime", ylab = "Voltage")
+  lines(as.POSIXct(Date_Time),Voltage)
 })
+
+#plot bottom left
+with(days2, plot(as.POSIXct(Date_Time), Sub_metering_1, type="n", xlab = "", ylab = "Energy sub metering"))
+with(days2, lines(as.POSIXct(Date_Time),Sub_metering_1, col = "black"))
+with(days2, lines(as.POSIXct(Date_Time),Sub_metering_2, col = "red"))
+with(days2, lines(as.POSIXct(Date_Time),Sub_metering_3, col = "blue"))
+legend("topright", "groups", c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), border = "white", lty=c(1,1,1), col = c("black", "blue", "red"),  cex=0.1)
+
+
+#plot bottom right
+with(days2, plot(as.POSIXct(Date_Time), Global_reactive_power, type="n", xlab = "datetime", ylab = "Global_reactive_power"))
+with(days2, lines(as.POSIXct(Date_Time), Global_reactive_power))
+
 dev.copy(png, file = "plot4.png")
+
 dev.off()
 
 

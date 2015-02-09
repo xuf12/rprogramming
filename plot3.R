@@ -40,12 +40,13 @@ days2 <- days2[,c(-1,-2)] # remove the original Date and Time variables
 # plot2days2 <- subset(days2, Day %in% c("Thurs", "Fri","Sat"))
 # table(plot2days2$Day) #this shows the empty levels are still there
 # plot2days2 <- droplevels(plot2days2) # drop the empty levels
+par(mfrow = c(1,1))
 
-with(days2, plot(as.POSIXct(Date_Time), Sub_metering_1, type="n", xlab = "", ylab = "Energy sub metering"), legend(2000,10), c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), lty=c(1,1), col = c("black", "blue", "red"))
+with(days2, plot(as.POSIXct(Date_Time), Sub_metering_1, type="n", xlab = "", ylab = "Energy sub metering"))
 with(days2, lines(as.POSIXct(Date_Time),Sub_metering_1, col = "black"))
 with(days2, lines(as.POSIXct(Date_Time),Sub_metering_2, col = "red"))
 with(days2, lines(as.POSIXct(Date_Time),Sub_metering_3, col = "blue"))
-legend("topright", "groups", c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), lty=c(1,1,1), col = c("black", "blue", "red"),  cex=0.6)
+legend("topright", "groups", c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), lty=c(1,1,1), col = c("black", "blue", "red"),  xjust= 1, yjust= 1)
 
 dev.copy(png, file = "plot3.png")
 dev.off()
